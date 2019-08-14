@@ -1,7 +1,7 @@
 from datetime import date
-from typing import Dict
+from typing import Dict, Union
 
-from flask import render_template, request
+from flask import render_template, request, url_for
 
 from app import app
 
@@ -17,6 +17,12 @@ def class_list():
     arguments = request.args  # type: Dict
     class_name = arguments['class_name']
     attendance_date = arguments.get('date', date.today())
+    class_info = get_classes_dict(class_name, attendance_date)
+    return render_template('class_list.html', title=class_info['name'], class_info=class_info, date=attendance_date,
+                           response_url=url_for('class_response'))
+
+
+def get_classes_dict(class_name: str, attendance_date: date) -> Dict[str, Union[str, Dict[str, str]]]:
     classes_info = {
         'automata': {
             'name': 'Automata Theory',
@@ -25,12 +31,12 @@ def class_list():
                 {
                     'student_id': '1000001',
                     'full_name': 'student1',
-                    'attendance': False
+                    'attendance': 'checked'
                 },
                 {
                     'student_id': '1000002',
                     'full_name': 'student2',
-                    'attendance': False
+                    'attendance': ''
                 }
             ]
         },
@@ -41,18 +47,17 @@ def class_list():
                 {
                     'student_id': '0000001',
                     'full_name': 'student1',
-                    'attendance': False
+                    'attendance': ''
                 },
                 {
                     'student_id': '0000002',
                     'full_name': 'student2',
-                    'attendance': False
+                    'attendance': ''
                 }
             ]
         }
     }
-    class_info = classes_info[class_name]
-    return render_template('class_list.html', title=class_info['name'], class_info=class_info, date=attendance_date)
+    return classes_info[class_name]
 
 
 @app.route('/class_list/response', methods=['POST'])
