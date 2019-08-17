@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>List accepted!</h1>
+    <h1>{{result_txt}}</h1>
     {% for key, value in result.items() %}
        <p> {{ key }}: {{ value }}</p>
     {% endfor %}
