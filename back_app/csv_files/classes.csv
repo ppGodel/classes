@@ -1,0 +1,5 @@
+student_id,full_name,status,class,level,scholar_period
+0000001,Student 1, True, database, 1, AD_2019
+0000002,Student 2, True, database, 1, AD_2019
+1000001,Student 3, True, automata, 1, AD_2019
+1000002,Student 4, True, automata, 1, AD_2019
