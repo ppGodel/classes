@@ -1,1 +1,3 @@
-student_id,class,date,attendance
+class_id,date,student_id,attendance
+DB_AD_19,2019-08-17,0000001,True
+DB_AD_19,2019-08-17,0000002,True

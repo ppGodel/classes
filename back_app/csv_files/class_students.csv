@@ -1,0 +1,5 @@
+class_id,student_id,full_name,status,level
+DB_AD_19,0000001,Student 1,True,1
+DB_AD_19,0000002,Student 2,True,1
+TDA_AD_19,1000001,Student 3,True,1
+TDA_AD_19,1000002,Student 4,True,1
