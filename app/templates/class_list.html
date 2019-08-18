@@ -4,7 +4,7 @@
     <h2>This is the list of students in the class {{ class_info.name }} on {{ date }}</h2>
     <form action = "{{ response_url }}" method = "POST">
         <input type="hidden" name="date" value="{{ date }}" />
-        <input type="hidden" name="name" value="{{ class_info.name }}" />
+        <input type="hidden" name="class_id" value="{{ class_info.class_id }}" />
         {% for student in class_info.students %}
         <div><p>{{ student.student_id }} {{ student.full_name }}
             <input type = "checkbox" name = "{{ student.student_id }}" value="True"

@@ -26,8 +26,8 @@ def class_list():
     attendance_date = arguments.get('date', convert_date_str(datetime.now()))  # type: str
     class_info = get_class_attendance_list(class_name, attendance_date)
     if not class_info:
-        class_info = {'name': class_name, 'date': attendance_date}
-    return render_template('class_list.html', title=class_info['name'], class_info=class_info, date=class_info['date'],
+        class_info = {'class_name': class_name, 'date': attendance_date}
+    return render_template('class_list.html', title=class_info['class_name'], class_info=class_info, date=class_info['date'],
                            response_url=url_for('class_response'))
 
 

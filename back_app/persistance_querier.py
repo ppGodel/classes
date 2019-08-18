@@ -1,14 +1,15 @@
 from datetime import datetime
-from typing import Optional, Dict, Callable, Union
+from util.constants import attendance_list_dict_type
+from typing import Dict, Callable
 from pandas import DataFrame
 from util.date_formatter import convert_date_str
-attendance_list_dict = Dict[str, Union[str, Dict[str, str]]]
 
 
-def get_attendance_list_from_mock(class_name: str, attendance_date: datetime.date) -> attendance_list_dict:
+def get_attendance_list_from_mock(class_name: str, attendance_date: datetime.date) -> attendance_list_dict_type:
     date_today = convert_date_str(datetime.combine(attendance_date, datetime.min.time()))  # type: str
     classes_info = {
         'automata': {
+            'class_id': 'TDA_AD_19',
             'name': 'Automata Theory',
             'teacher': 'JAHS',
             'date': date_today,
@@ -26,7 +27,8 @@ def get_attendance_list_from_mock(class_name: str, attendance_date: datetime.dat
             ]
         },
         'db': {
-            'name': 'Database',
+            'class_id': 'DB_AD_19',
+            'class_name': 'Database',
             'teacher': 'JAHS',
             'date': date_today,
             'students': [
@@ -46,35 +48,15 @@ def get_attendance_list_from_mock(class_name: str, attendance_date: datetime.dat
     return classes_info[class_name]
 
 
-def get_student_names(class_id: str) -> DataFrame:
-    pass
-
-
-def get_class_info(class_id) -> Dict:
-    pass
-
-
-def transform_attendance_list_to_dict(attendance_list: DataFrame) -> attendance_list_dict:
-    attendance_df = attendance_list.reset_index('student_id')
-    class_id, attendance_date = attendance_df.index.get_values()[0]
-    attendance_df[attendance_df['attendance'], 'attendance'] = 'checked'
-    attendance_df[not attendance_df['attendance'], 'attendance'] = ''
-    student_names = get_student_names(class_id)
-    student_attendance_list = student_names.join(attendance_df, on='student_id')
-    class_info = get_class_info(class_id)
-    return {'name': class_info['name'], 'teacher': class_info['teacher'], 'date': attendance_date, 'students': student_attendance_list }
-
-
-def transform_dict_to_attendance_list(attendance_list: Dict) -> DataFrame:
-    pass
-
-
-def get_attendance_list_from(get_df_by_date_class: Callable[[str, str], DataFrame],
-                             create_attendance_list_for_date: Callable[[str, str], DataFrame],
-                             class_name: str, attendance_date: datetime.date) -> \
-        Optional[Dict[str, str]]:
-    attendance_list = get_df_by_date_class(class_name, attendance_date)
+def get_attendance_list_from(get_attendance_df_by_class_date: Callable[[str, str], DataFrame],
+                             create_attendance_df_class_date: Callable[[str, str], DataFrame],
+                             transform_attendance_list_to_dict: Callable[[DataFrame], Dict],
+                             class_name: str, attendance_date: datetime.date) -> attendance_list_dict_type:
+    attendance_list = get_attendance_df_by_class_date(class_name, attendance_date)
     if attendance_list.empty:
-        attendance_list = create_attendance_list_for_date(class_name, attendance_date)
+        attendance_list = create_attendance_df_class_date(class_name, attendance_date)
     return transform_attendance_list_to_dict(attendance_list)
 
+
+def save_attendance_dict(save_attendance_df: Callable[[Dict], str], attendance_dict: Dict) -> str:
+    return save_attendance_df(attendance_dict)
