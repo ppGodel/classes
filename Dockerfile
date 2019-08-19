@@ -5,6 +5,10 @@ RUN adduser -D classes
 WORKDIR /home/classes
 
 COPY requirements.txt requirements.txt
+RUN apk add --update curl gcc g++ \
+    && rm -rf /var/cache/apk/*
+
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
 
