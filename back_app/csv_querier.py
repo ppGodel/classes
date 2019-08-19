@@ -52,7 +52,7 @@ def save_attendance_list(attendance_list: DataFrame) -> bool:
         if not class_attendance_list.loc[(class_id, attendance_date), ].empty:
             [update_class_attendance(class_attendance_list, student_attendance[1])
              for student_attendance in attendance_list_df.iterrows()]
-    except KeyError:
+    except (KeyError, TypeError):
         class_attendance_list = class_attendance_list.append(attendance_list)
     class_attendance_list.to_csv(attendance_csv_path)
     return True
