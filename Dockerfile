@@ -1,24 +1,20 @@
-FROM python:3.6-alpine
+FROM amancevice/pandas0.25.0-alpine
 
 RUN adduser -D classes
 
 WORKDIR /home/classes
 
 COPY requirements.txt requirements.txt
-RUN apk add --update curl gcc g++ \
-    && rm -rf /var/cache/apk/*
 
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-RUN python -m venv venv
-RUN venv/bin/pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY app app
 COPY back_app back_app
 COPY util util
-COPY classes_app.py boot.sh ./
+COPY classes_app.py boot.sh waitress_server.py ./
 RUN chmod +x boot.sh
 
-ENV FLASK_APP classes_app.py
+# ENV FLASK_APP classes_app.py
 
 RUN chown -R classes:classes ./
 USER classes
