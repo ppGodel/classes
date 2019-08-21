@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from back_app.api_querier import map_parameters
+from back_end.web_app.api_querier import map_parameters
 
 
 class Test_classes_requester(TestCase):

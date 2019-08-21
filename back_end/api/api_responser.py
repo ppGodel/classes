@@ -1,7 +1,7 @@
 from datetime import date
 from functools import partial
 from typing import Dict
-from back_app import persistance_querier, csv_querier
+from back_end.api import csv_querier, persistance_querier
 from util.constants import attendance_list_dict_type
 
 # get_attendance_list_from = persistance_querier.get_attendance_list_from_mock

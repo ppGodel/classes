@@ -2,8 +2,8 @@ from typing import Dict
 
 from flask import request, jsonify
 
-from app import app
-from back_app.api_responser import get_classes_dict, save_attendance_list
+from api_app.app import app
+from back_end.api.api_responser import get_classes_dict, save_attendance_list
 
 
 @app.route('/classes/api/get_class_list', methods=['GET'])

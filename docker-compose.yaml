@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  classes_api:
+    image: classes_api:latest
+    build:
+      context: ./api_app
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5001
+    container_name: classes_api
+  classes_web_app:
+    image: classes_app:latest
+    build:
+      context: ./web_app
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    container_name: classes_web_app
+    volumes:
+      - back_end/csv_files:/home/classes/back_end/csv_files

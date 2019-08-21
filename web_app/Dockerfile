@@ -6,11 +6,11 @@ WORKDIR /home/classes
 
 COPY requirements.txt requirements.txt
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt && mkdir back_end
 
 COPY app app
-COPY back_app back_app
-COPY util util
+COPY ../back_end/web_app back_end/web_app
+COPY ../util util
 COPY classes_app.py boot.sh waitress_server.py ./
 RUN chmod +x boot.sh
 

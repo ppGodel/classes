@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Dict, Optional
 
-from back_app.api_querier import get_response_json, map_parameters, send_post_get_response_text
+from back_end.web_app.api_querier import get_response_json, map_parameters, send_post_get_response_text
 
 
 def get_class_attendance_list_url(base_url: str, class_name: str, attendance_date: date) -> str:

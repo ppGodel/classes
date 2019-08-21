@@ -4,7 +4,7 @@ from pandas import DataFrame, read_csv, Series, MultiIndex
 
 from util.constants import attendance_list_dict_type
 
-folder_path = "back_app/csv_files"
+folder_path = "../../back_end/csv_files"
 class_student_csv_path = "{}/{}".format(folder_path, 'class_students.csv')
 class_csv_path = "{}/{}".format(folder_path, 'class_info.csv')
 attendance_csv_path = "{}/{}".format(folder_path, 'class_attendance.csv')

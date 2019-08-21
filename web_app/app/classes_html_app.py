@@ -4,14 +4,14 @@ from typing import Dict
 
 from flask import render_template, request, url_for
 
-from app import app
-from back_app import classes_requester
+from web_app.app import app
+from back_end.web_app import classes_requester
 from util.date_formatter import convert_date_str
 
-base_url = 'http://0.0.0.0:5000'
+api_url = 'http://0.0.0.0:5001'
+get_class_attendance_list = partial(classes_requester.get_class_attendance_list, api_url)
+send_class_attendance_list = partial(classes_requester.send_class_attendance_list, api_url)
 
-get_class_attendance_list = partial(classes_requester.get_class_attendance_list, base_url)
-send_class_attendance_list = partial(classes_requester.send_class_attendance_list, base_url)
 
 @app.route('/')
 @app.route('/index')
