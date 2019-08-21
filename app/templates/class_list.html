@@ -5,11 +5,24 @@
     <form action = "{{ response_url }}" method = "POST">
         <input type="hidden" name="date" value="{{ date }}" />
         <input type="hidden" name="class_id" value="{{ class_info.class_id }}" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Attendance</th>
+                </tr>
+            </thead>
+        <tbody>
         {% for student in class_info.students %}
-        <div><p>{{ student.student_id }} {{ student.full_name }}
-            <input type = "checkbox" name = "{{ student.student_id }}" value="True"
-                   {{ student.attendance }}/></p></div>
+        <tr>
+            <th scope="row">{{ student.student_id }} </th>
+            <td>{{ student.full_name }} </td>
+            <td><input type = "checkbox" name = "{{ student.student_id }}" value="True"
+                   {{ student.attendance }}/></td>
+        </tr>
         {% endfor %}
+        </table>
          <p><input type = "submit" value = "submit" /></p>
     </form>
 {% endblock %}
