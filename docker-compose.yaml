@@ -6,7 +6,7 @@ services:
       context: ./api_app
       dockerfile: Dockerfile
     ports:
-      - 5000:5001
+      - 5001:5001
     container_name: classes_api
   classes_web_app:
     image: classes_app:latest
