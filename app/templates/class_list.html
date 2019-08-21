@@ -17,8 +17,8 @@
         {% for student in class_info.students %}
         <tr>
             <th scope="row">{{ student.student_id }} </th>
-            <td>{{ student.full_name }} </td>
-            <td><input type = "checkbox" name = "{{ student.student_id }}" value="True"
+            <td> <label for="{{ student.student_id }}">{{ student.full_name }}</label> </td>
+            <td><input type = "checkbox" id="{{ student.student_id }}" name = "{{ student.student_id }}" value="True"
                    {{ student.attendance }}/></td>
         </tr>
         {% endfor %}
