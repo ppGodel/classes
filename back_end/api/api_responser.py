@@ -13,9 +13,10 @@ get_attendance_list_from = partial(
     csv_querier.transform_attendance_list_to_dict)
 
 save_attendance_list_fn = partial(persistance_querier.save_attendance_dict, csv_querier.save_attendance_dict)
+get_classes_list = csv_querier.get_classes_list
 
 
-def get_classes_dict(class_name: str, attendance_date: date) -> attendance_list_dict_type:
+def get_attendance_class_dict(class_name: str, attendance_date: date) -> attendance_list_dict_type:
     return get_attendance_list_from(class_name, attendance_date)
 
 
@@ -25,3 +26,7 @@ def save_attendance_list(attendance_list: Dict):
         return 'List Accepted, {}'.format(save_result)
     except Exception as e:
         return 'Error'.format(e)
+
+
+def get_classes_info() -> Dict:
+    return get_classes_list()

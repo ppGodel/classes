@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Hello, {{ class_info.teacher }}!</h1>
-    <h2>This is the list of students in the class {{ class_info.name }} on {{ date }}</h2>
+    <h2>This is the list of students in the class {{ class_info.class_name }} on {{ date }}</h2>
     <form action = "{{ response_url }}" method = "POST">
         <input type="hidden" name="date" value="{{ date }}" />
         <input type="hidden" name="class_id" value="{{ class_info.class_id }}" />

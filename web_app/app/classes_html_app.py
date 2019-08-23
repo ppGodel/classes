@@ -11,12 +11,18 @@ from util.date_formatter import convert_date_str
 api_url = 'http://0.0.0.0:5001'
 get_class_attendance_list = partial(classes_requester.get_class_attendance_list, api_url)
 send_class_attendance_list = partial(classes_requester.send_class_attendance_list, api_url)
-
+get_class_list = partial(classes_requester.get_class_list, api_url)
 
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html')
+
+
+@app.route('/classes_attendance')
+def classes():
+    classes_list = get_class_list()
+    return render_template('classes_attendance.html', classes=classes_list)
 
 
 @app.route('/class_list', methods=['GET'])

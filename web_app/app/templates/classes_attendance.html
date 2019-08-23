@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for class in classes %}
+<a href="{{ url_for('class_list') }}?class_name={{ class.class_id}}">{{ class.class_name }}</a>
+<br>
+{% endfor %}
+
+{% endblock %}

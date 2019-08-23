@@ -80,6 +80,11 @@ def get_class_info(class_id: str) -> DataFrame:
                                     'class_id=="{}"'.format(class_id), sep=',', index_col=[0])
 
 
+@lru_cache(maxsize=None)
+def get_classes_info() -> DataFrame:
+    return get_df_from_csv(class_csv_path, sep=',', index_col=[0])
+
+
 def student_dict(student: Series, student_names: DataFrame) -> Dict[str, str]:
     return {'student_id': student['student_id'],
             'full_name': student_names.loc[student['student_id'], 'full_name'],
@@ -114,3 +119,6 @@ def transform_dict_to_attendance_list(attendance_list: Dict) -> DataFrame:
     return DataFrame.from_records(data=attendance_list_tuple, columns=['class_id', 'date', 'student_id', 'attendance'])\
         .set_index(['class_id', 'date', 'student_id'])
 
+
+def get_classes_list() -> Dict:
+    return get_classes_info().reset_index('class_id').to_dict(orient='records')
